@@ -1,12 +1,12 @@
-from django import forms
+from django.forms import ModelForm
 from ordenamiento.models import Parroquia, Barrio
 
-class ParroquiaForm(forms.ModelForm):
+class ParroquiaForm(ModelForm):
     class Meta:
         model = Parroquia
         fields = ['nombre', 'ubicacion', 'tipo']
 
-class BarrioForm(forms.ModelForm):
+class BarrioForm(ModelForm):
     class Meta:
         model = Barrio
         fields = ['nombre', 'num_viviendas', 'num_parques', 'num_edificios', 'parroquia']

@@ -1,0 +1,27 @@
+<h2>Listado de Barrios</h2>
+
+<ul>
+ {% for barrio in barrios %}
+  <li>
+    <strong>{{ barrio.nombre }}</strong> (Parroquia: {{ barrio.parroquia.nombre }}) 
+    - [<a href="{% url 'editar_barrio' barrio.id %}">editar</a>]
+    <br/>
+    Viviendas: {{ barrio.num_viviendas }} | Parques: {{ barrio.num_parques }} | Edificios: {{ barrio.num_edificios }}
+    {% if barrio.presidente %}
+    <br/>Presidente: {{ barrio.presidente.nickname }} ({{ barrio.presidente.profesion }})
+    {% endif %}
+  </li>
+  <hr />
+ {% empty %}
+  <li>No hay barrios registrados.</li>
+ {% endfor %}
+</ul>
+
+<br />
+[<a href="{% url 'listar_parroquias' %}">listar parroquias</a>]
+<br />
+[<a href="{% url 'listar_barrios' %}">listar barrios</a>]
+<br />
+[<a href="{% url 'crear_parroquia' %}">crear parroquia</a>]
+<br />
+[<a href="{% url 'crear_barrio' %}">crear barrio</a>]

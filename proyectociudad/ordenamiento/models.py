@@ -18,6 +18,12 @@ class Parroquia(models.Model):
     def __str__(self):
         return "%s" % (self.nombre)
 
+    def obtener_total_parques(self):
+        return sum([b.num_parques for b in self.barrios.all()])
+
+    def obtener_profesiones_presidentes(self):
+        return [b.presidente.profesion for b in self.barrios.all() if hasattr(b, 'presidente')]
+
 class Barrio(models.Model):
     nombre = models.CharField(max_length=100)
     num_viviendas = models.IntegerField()

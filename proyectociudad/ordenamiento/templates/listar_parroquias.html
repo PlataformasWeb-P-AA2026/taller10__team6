@@ -7,8 +7,21 @@
     <strong>{{ parroquia.nombre }}</strong> ({{ parroquia.ubicacion }}, {{ parroquia.tipo }}) 
     - [<a href="{% url 'editar_parroquia' parroquia.id %}">editar</a>]
     <ul>
-        <li><em>Barrios por implementar</em></li>
+        {% for barrio in parroquia.barrios.all %}
+            <li>{{ barrio.nombre }} (Parques: {{ barrio.num_parques }}, Viviendas: {{ barrio.num_viviendas }})</li>
+        {% empty %}
+            <li><em>No hay barrios registrados en esta parroquia.</em></li>
+        {% endfor %}
     </ul>
+    <p>
+        <strong>Total de parques en la parroquia:</strong> {{ parroquia.obtener_total_parques }} <br/>
+        <strong>Profesiones de los presidentes vinculados:</strong> 
+        {% for prof in parroquia.obtener_profesiones_presidentes %}
+            {{ prof }}{% if not forloop.last %}, {% endif %}
+        {% empty %}
+            <em>Ninguna registrada</em>
+        {% endfor %}
+    </p>
   </li>
   <hr />
  {% endfor %}
@@ -17,4 +30,8 @@
 <br />
 [<a href="{% url 'listar_parroquias' %}">listar parroquias</a>]
 <br />
+[<a href="{% url 'listar_barrios' %}">listar barrios</a>]
+<br />
 [<a href="{% url 'crear_parroquia' %}">crear parroquia</a>]
+<br />
+[<a href="{% url 'crear_barrio' %}">crear barrio</a>]
